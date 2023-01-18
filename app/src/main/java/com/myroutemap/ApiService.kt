@@ -6,8 +6,8 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-// https://api.openrouteservice.org/v2/
-// directions/driving-car
+// https://api.openrouteservice.org/
+// v2/directions/driving-car
 // ?
 // api_key=5b3ce3597851110001cf6248b568bcde1a2445dc93decd70c099178b
 // &
@@ -15,10 +15,10 @@ interface ApiService {
 // &
 // end=8.687872,49.420318
 
-    @GET("directions/driving-car")
-    fun getRoute(
+    @GET("/v2/directions/driving-car")
+    suspend fun getRoute(
         @Query("api_key") key: String,
-        @Query("start") start: String,
-        @Query("end") end: String
-    ): Response<*>
+        @Query("start", encoded = true) start: String,
+        @Query("end", encoded = true) end: String
+    ): Response<RouteResponse>
 }
